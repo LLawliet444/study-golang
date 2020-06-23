@@ -2,7 +2,9 @@ package main
 
 import(
 	"fmt"
-	"sort"
+	// "sort"
+	// "strings"
+	// "strconv"
 )
 
 func main(){
@@ -123,4 +125,101 @@ func main(){
 	// s[1][2] = "塞尔达"
 	// fmt.Println(s)
 	// fmt.Println(map2)
+
+	// // 59 string
+	// s1 := "hello 中国"
+	// s2 := "hello world"
+	// for _,v := range s2 {
+	// 	fmt.Printf("%c",v)
+	// }
+	// fmt.Println("\n")
+	// for _,v := range s1 {
+	// 	fmt.Printf("%c",v)
+	// }
+
+	// // 字节切片转字符串
+	// slice1 := []byte{65,66,67,68,69}
+	// s3 := string(slice1)
+	// fmt.Println(s3)
+
+	// // 字符串转切片
+	// s4 := "abcde"
+	// slice2 := []byte(s4)
+	// fmt.Println(slice2) 
+
+	// // 字符串不能修改
+
+	// // strings包
+	// fmt.Println(strings.Contains(s1,"e"))
+	// fmt.Println(strings.ContainsAny(s1,"abcd"))
+	// fmt.Println(strings.Count(s1,"l"))
+	// fmt.Println(strings.HasPrefix(s1,"h"))
+	// fmt.Println(strings.HasSuffix(s1,"中国"))
+	// fmt.Println(strings.Index(s1,"中国"))
+	// fmt.Println(strings.IndexAny(s1,"中国l"))
+	// fmt.Println(strings.LastIndex(s1,"l"))
+	// fmt.Println(strings.LastIndexAny(s1,"中国l"))
+	// // 字符串拼接
+	// ss1 := []string{"hello","world"}
+	// s5 := strings.Join(ss1,",")
+	// fmt.Println(s5)
+	// // 字符串切割
+	// ss2 := strings.Split(s5,",")
+	// fmt.Println(ss2)
+	// // 截取字符串
+	// s6 := s1[:5]
+	// fmt.Println(s6)
+
+	// // 字符串转换
+	// s7 := "true"
+	// b1,err := strconv.ParseBool(s7)
+	// if err != nil{
+	// 	fmt.Println(err)
+	// 	return
+	// }
+	// fmt.Printf("%T\n",b1)
+	// ss3 := strconv.FormatBool(b1)
+	// fmt.Printf("%T\n",ss3)
+	// i3,err := strconv.Atoi("-20")
+	// fmt.Printf("%T,%d",i3,i3)
+
+	// 62 函数（值类型值传递，引用类型引用传递）
+	sum1 := getSum(10);
+	fmt.Println(sum1)
+	getAdd(1,2)
+	getSum1(1,2,3,4)
+	s1 := []int{1,2,3,4,5}
+	getSum1(s1...)
+
+	res1,res2 := rectangle(3,5)
+	fmt.Printf("周长：%f,面积：%f",res1,res2)
+}
+
+func getSum(n int)(sum int){
+	for i := 1;i <= n; i++{
+		sum += i
+	}
+	// fmt.Println(sum)
+	return sum
+}
+
+func getAdd(a ,b int){
+	sum := a+b
+	fmt.Println(sum)
+}
+
+// 可变参数(传入的是切片，可变参数要放最后且只能有一个)
+func getSum1(nums ... int){
+	sum := 0
+	for i := 0;i < len(nums);i++{
+		sum  += nums[i]
+	}
+	fmt.Println(sum)
+}
+
+// 求矩形的周长和面积
+func rectangle(len,wid float64)(float64,float64){
+	perimeter := (len + wid)*2
+	area := len * wid
+	return perimeter,area
 }
