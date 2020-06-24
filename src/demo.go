@@ -79,7 +79,7 @@ func main(){
 	// map1[3] = "花择言"
 	// map1[4] = "顾惜朝"
 	// // key存在获取数值，key不存在获取的为0值
-	// fmt.Println(map1) 
+	// fmt.Println(map1)
 
 	// v1,ok := map1[40]
 	// if ok{
@@ -145,7 +145,7 @@ func main(){
 	// // 字符串转切片
 	// s4 := "abcde"
 	// slice2 := []byte(s4)
-	// fmt.Println(slice2) 
+	// fmt.Println(slice2)
 
 	// // 字符串不能修改
 
@@ -183,16 +183,167 @@ func main(){
 	// i3,err := strconv.Atoi("-20")
 	// fmt.Printf("%T,%d",i3,i3)
 
-	// 62 函数（值类型值传递，引用类型引用传递）
-	sum1 := getSum(10);
-	fmt.Println(sum1)
-	getAdd(1,2)
-	getSum1(1,2,3,4)
-	s1 := []int{1,2,3,4,5}
-	getSum1(s1...)
+	// // 62 函数（值类型值传递，引用类型引用传递）
+	// sum1 := getSum(10);
+	// fmt.Println(sum1)
+	// getAdd(1,2)
+	// getSum1(1,2,3,4)
+	// s1 := []int{1,2,3,4,5}
+	// getSum1(s1...)
 
-	res1,res2 := rectangle(3,5)
-	fmt.Printf("周长：%f,面积：%f",res1,res2)
+	// res1,res2 := rectangle(3,5)
+	// fmt.Printf("周长：%f,面积：%f",res1,res2)
+
+	// 递归函数
+	// fmt.Println(getSum2(5))
+	// fmt.Println(getFibonacci(8))
+	// // 1 2 3 4 5 6 7 8
+  // // 	1 1 2 3 5 8 13 21
+
+  // // defer 延迟函数，等主函数执行完再执行，使用栈，先入后出
+  // // defer函数调用时，已传参不执行，return在defer函数执行完之后执行
+  // // 用法	临时文件的删除
+  // 		// 异常处理 panic()和recover() recover()语法上要求在defer中执行
+  // defer fun1("hello")
+  // defer fun1("world")
+
+  // fmt.Printf("%T\n",rectangle)
+
+  // // 定义函数类型的变量
+  // var c func(int)int
+  // c = getSum
+  // fmt.Println(c)
+  // a := c(10)
+  // fmt.Println(a)
+
+  // // 匿名函数(通过小括号直接调用，通常只能使用一次)
+  // // go支持函数式编程
+  // // 	1.将匿名函数作为另一个函数的参数，即回调函数
+  // // 	2.将匿名函数作为另一个函数的返回值，可以形成闭包结构
+  // fun2 := func (){
+  // 	fmt.Println("匿名函数")
+  // }
+  // fun2()
+  // fun2()
+  // // 定义带参数的匿名函数
+  // func (a,b int){
+  // 	fmt.Println(a,b)
+  // }(1,2)
+  // // 定义带返回值的匿名函数
+  // var res = func (a,b int)(int){
+  // 	return a + b
+  // }(3,4)
+  // fmt.Println(res)
+
+ 	// // 回调函数
+ 	// // fmt.Printf("%T\n%T\n",add,oper)
+
+ 	// res1 := add(1,2)
+ 	// fmt.Println(res1)
+ 	// res2 := oper(1,2,sub)
+ 	// fmt.Println(res2)
+ 	// fun1 := func(a,b int)int{
+ 	// 	return a*b
+ 	// }
+ 	// fmt.Println(oper(10,20,fun1))
+
+ 	// // 闭包
+ 	// res1 := increment()
+ 	// fmt.Printf("%T\n",res1)
+ 	// v1 := res1()
+ 	// fmt.Println(v1)
+ 	// v2 := res1()
+ 	// fmt.Println(v2)
+
+ 	// res2 := increment()
+ 	// v3 := res2()
+ 	// fmt.Println(v3)
+
+ 	// v4 := res1()
+ 	// fmt.Println(v4)
+
+ 	// // 69 指针
+ 	// a := 10
+ 	// fmt.Printf("%p\n",&a)
+ 	// var p1 *int
+ 	// fmt.Println(p1)
+ 	// p1 = &a
+ 	// fmt.Println(p1)
+ 	// fmt.Println(*p1)
+ 	// a = 100
+ 	// fmt.Printf("%p\n",&a)
+ 	// *p1 = 200
+ 	// fmt.Println(a)
+
+ 	// // 指针的指针
+ 	// var p2 **int
+ 	// fmt.Println(p2)
+ 	// p2 = &p1
+ 	// fmt.Printf("%T,%T,%T\n",a,p1,p2)
+ 	// **p2 = 300
+ 	// fmt.Println(a)
+
+ 	// // 数组指针（首先是指针）
+ 	// arr1 := [4]int{1,2,3,4}
+ 	// fmt.Println(arr1)
+ 	// var p1 *[4]int
+ 	// p1 = &arr1
+ 	// fmt.Println(p1)
+ 	// fmt.Println(*p1)
+ 	// (*p1)[0] = 100
+ 	// p1[1] = 200
+ 	// fmt.Println(p1)
+ 	// // 指针数组（首先是数组）
+ 	// a := 1
+ 	// b := 2
+ 	// c := 3
+ 	// d := 4
+ 	// arr2 := [4]int{a,b,c,d}
+ 	// arr3 := [4]*int{&a,&b,&c,&d}
+ 	// fmt.Println(arr2)
+ 	// fmt.Println(arr3)
+ 	// *arr3[0] = 100
+ 	// fmt.Println(arr2)
+ 	// fmt.Println(a)
+ 	// // 函数指针
+ 	// a := add
+ 	// fmt.Printf("%p\n",&a)
+ 	// // 指针函数
+ 	// arr2 := fun3()
+ 	// fmt.Printf("arr2:%T,%p,%v\n",arr2,arr2,arr2)
+ 	// // 指针作为参数（引用传递）
+ 	// a := 100
+ 	// fun2(&a)
+ 	// fmt.Println(a)
+
+}
+func fun2(p1 *int){
+	*p1 = 200
+}
+func fun3()*[4]int{
+	arr := [4]int{5,6,7,8}
+	fmt.Printf("arr:%p\n",&arr)
+	return &arr
+}
+
+func increment()func()int{
+	i := 0 //返回值为函数，且返回函数用到i，i不会随着外层函数调用销毁，下次调用外层函数时重新创建对应的i
+	fun := func()int{
+		i++
+		return i
+	}
+	return fun
+}
+
+func add(a,b int)int{
+	return a+b
+}
+func sub(a,b int)int{
+	return a-b
+}
+func oper(a,b int,fun func(int,int)int)int{
+	fmt.Println(a,b,fun)
+	return fun(a,b)
 }
 
 func getSum(n int)(sum int){
@@ -222,4 +373,25 @@ func rectangle(len,wid float64)(float64,float64){
 	perimeter := (len + wid)*2
 	area := len * wid
 	return perimeter,area
+}
+
+// 求1-n的和
+func getSum2( n int )(int){
+	if( n == 1 ){
+		return 1
+	}
+	sum := getSum2( n - 1 ) + n
+	return sum
+}
+
+// 斐波那契数列
+func getFibonacci(n int)(int){
+	if( n == 1|| n == 2 ){
+		return 1
+	}
+	return getFibonacci( n - 1 )+getFibonacci( n - 2 )
+}
+
+func fun1(s string){
+	fmt.Println(s)
 }
