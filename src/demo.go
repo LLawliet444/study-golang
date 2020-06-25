@@ -2,9 +2,10 @@ package main
 
 import(
 	"fmt"
+	"math"
 	// "sort"
 	// "strings"
-	// "strconv"
+	"strconv"
 )
 
 func main(){
@@ -316,7 +317,355 @@ func main(){
  	// fun2(&a)
  	// fmt.Println(a)
 
+ 	// // 结构体
+ 	// var p1 Person
+ 	// fmt.Println(p1)
+ 	// p1.name = "吉良吉影"
+ 	// p1.age = 2
+ 	// p1.sex = "女"
+ 	// p1.address = "猫窝"
+ 	// fmt.Printf("姓名：%s,年龄：%d,性别：%s,地址：%s\n",p1.name,p1.age,p1.sex,p1.address)
+ 	// p2 := Person{}
+ 	// p2.name = "林克"
+ 	// fmt.Printf("姓名：%s,年龄：%d,性别：%s,地址：%s\n",p2.name,p2.age,p2.sex,p2.address)
+ 	// p3 := Person{name:"花择言",age:1,sex:"男",address:"花家地"}
+ 	// fmt.Printf("姓名：%s,年龄：%d,性别：%s,地址：%s\n",p3.name,p3.age,p3.sex,p3.address)
+ 	// p4 := Person{"李小新",18,"女","望京"}
+ 	// fmt.Printf("姓名：%s,年龄：%d,性别：%s,地址：%s\n",p4.name,p4.age,p4.sex,p4.address)
+ 	// // 结构体值传递
+ 	// p5 := p1
+ 	// fmt.Printf("%p,%p\n",&p1,&p5)
+ 	// // 定义结构体指针（引用传递）
+ 	// var pp1 *Person
+ 	// pp1 = &p1
+ 	// pp1.name = "李四"
+ 	// fmt.Println(p1)
+ 	// // new返回指针，且不为nil
+ 	// pp2 := new(Person)
+ 	// fmt.Printf("%T\n",pp2)
+ 	// pp2.name = "Jerry"
+ 	// pp2.age = 20
+ 	// pp2.sex = "男"
+ 	// pp2.address = "美国"
+ 	// fmt.Println(pp2)
+
+ 	// // 匿名结构体
+ 	// p1 := struct{
+ 	// 	name string
+ 	// 	age int
+ 	// }{
+ 	// 	name:"李四",age:19,
+ 	// }
+ 	// fmt.Println(p1)
+
+ 	// // 匿名字段
+ 	// w1 := Worker{"李晓华",10}
+ 	// fmt.Println(w1.string)
+
+ 	// // 嵌套结构体
+ 	// b1 := Book{"西游记",45.9}
+ 	// s1 := Student{"王二狗",18,b1}
+ 	// fmt.Println(s1)
+ 	// fmt.Println(s1.book.bookName)
+ 	// s2 := Student{"李小花",18,Book{"娱乐至死",28}}
+ 	// fmt.Println(s2)
+ 	// s1.book.bookName = "红楼梦"
+ 	// fmt.Println(b1)
+
+ 	// b2 := Book{"呼啸山庄",30}
+ 	// s3 := Student2{"小心",29,&b2}
+ 	// fmt.Println(s3)
+ 	// s3.book.bookName = "雾都孤儿"
+ 	// fmt.Println(b2)
+
+ 	// // 面向对象（提升字段）
+ 	// var s1 Student3
+ 	// s1.name = "吉良吉影"
+ 	// s1.age = 2
+ 	// s1.school = "清华大学"
+ 	// fmt.Println(s1)
+
+ 	// // 方法
+ 	// w1 := Worker{name:"王二狗",age:30,sex:"男"}
+ 	// w1.work()
+ 	// w2 := &Worker{name:"Ruby",age:32,sex:"女"}
+ 	// w2.work()
+ 	// w2.rest()
+ 	// w1.rest()
+ 	// w1.printInfo()
+ 	// c1 := Cat{color:"蓝白",age:1}
+ 	// c1.printInfo()
+ 	// // 方法的继承和改写
+ 	// p1 := Person{name:"王二狗",age:30}
+ 	// p1.eat()
+ 	// s1 := Student3{Person:Person{name:"吉良吉影",age:10,sex:"女",address:"望京"},school:"清华大学"}
+ 	// s1.eat()
+ 	// s1.study()
+
+ 	// // 接口(方法必须全部实现，非侵入式)
+ 	// m1 := Mouse{name:"罗技小红"}
+ 	// f1 := FlashDisk{name:"闪迪64G"}
+ 	// testInterFace(m1)
+ 	// testInterFace(f1)
+ 	// var usb USB
+ 	// usb = m1
+ 	// usb.start()
+ 	// f1.delete()
+ 	// var arr[2]USB
+ 	// arr[0] = m1
+ 	// arr[1] = f1
+ 	// fmt.Println(arr)
+
+ 	// // 空接口(可以存储任意类型的数据)，可以作为容器
+ 	// var a1 A = 100
+ 	// var a2 A = "mother fuck"
+ 	// test1(a1)
+ 	// test1(a2)
+ 	// map1 := make(map[string]interface{})
+ 	// map1["name"] = "李晓华"
+ 	// map1["age"] = 30
+ 	// map1["friend"] = Person{name:"梨花",age:10}
+ 	// fmt.Println(map1)
+
+ 	// slice1 := make([]interface{},0,10)
+ 	// slice1 = append(slice1,a1,a2,"吉良吉影",map1)
+ 	// fmt.Println(slice1 )
+
+ 	// var cat Cat = Cat{color:"狸花"}
+ 	// cat.test1()
+ 	// cat.test2()
+ 	// cat.test3()
+
+ 	// // 接口嵌套
+ 	// var a1 A1 = cat
+ 	// a1.test1()
+ 	// var b1 B = cat
+ 	// b1.test2()
+ 	// var c1 C = cat
+ 	// c1.test1()
+ 	// c1.test2()
+ 	// c1.test3()
+
+ 	// var a2 A1 = c1
+ 	// a2.test1()
+
+ 	// // 接口断言
+ 	// var t1 Triangle = Triangle{3,4,5}
+ 	// fmt.Println(t1.peri())
+ 	// fmt.Println(t1.area())
+
+ 	// var c1 Circle = Circle{4}
+ 	// fmt.Println(c1.peri())
+ 	// fmt.Println(c1.area())
+
+ 	// var s1 Shape
+ 	// s1 = t1
+ 	// fmt.Println(s1.peri())
+ 	// fmt.Println(s1.area())
+
+ 	// var s2 Shape = c1
+ 	// fmt.Println(s2.peri())
+ 	// fmt.Println(s2.area())
+
+ 	// testShape(t1)
+ 	// testShape(s1)
+ 	// testShape(s2)
+
+ 	// getType(t1)
+ 	// getType(c1)
+ 	// getType(s1)
+
+ 	// var t2 *Triangle = &Triangle{3,4,3}
+ 	// getType(t2)
+
+ 	// getType2(t1)
+ 	// getType2(c1)
+
+ 	// Type关键词
+ 	var i1 myint = 100
+ 	var i2 = 200
+ 	var name mystr = "王二狗"
+ 	var s1 = "mother fuck"
+ 	fmt.Println(i1,i2)
+ 	fmt.Println(name,s1)
+
+ 	fmt.Printf("%T,%T,%T,%T\n",i1,i2,s1,name)
+
+ 	res1 := fun10()
+ 	fmt.Println(res1(10,20))
+ 	var i3 myint2 = 300
+ 	i2 = i3
+ 	fmt.Println(i2)
+
 }
+// 定义新类型
+type myint int
+type mystr string
+// 定义函数类型
+type myfun func(int,int)(string)
+func fun10()myfun{
+	fun := func(a,b int)string{
+		s := strconv.Itoa(a)+strconv.Itoa(b)
+		return s
+	}
+	return fun
+}
+// 类型别名
+type myint2 = int
+func getType(s Shape){
+	if ins,ok := s.(Triangle);ok{
+		fmt.Println("是三角形，三边为：",ins.a,ins.b,ins.c)
+	}else if ins,ok := s.(Circle);ok{
+		fmt.Println("是圆形，半径是：",ins.radius)
+	}else{
+		fmt.Println("我也不知道了")
+	}
+}
+func getType2(s Shape){
+	switch ins := s.(type){
+	case Triangle:
+		fmt.Println("三角形",ins.a,ins.b,ins.c)
+	case Circle:
+		fmt.Println("圆形",ins.radius)
+	}
+}
+func testShape(s Shape){
+	fmt.Printf("周长：%2f,面积：%2f\n",s.peri(),s.area())
+}
+type Shape interface{
+	peri() float64 //周长
+	area() float64 //面积
+}
+type Triangle struct{
+	a,b,c float64
+}
+func (t Triangle)peri()float64{
+	return t.a+t.b+t.c
+}
+func (t Triangle)area()float64{
+	p := t.peri()/2
+	s := math.Sqrt( p*(p-t.a)*(p-t.b)*(p-t.c) )
+	return s
+}
+type Circle struct{
+	radius float64
+}
+func (c Circle)peri()float64{
+	return c.radius*2*math.Pi
+}
+func (c Circle)area()float64{
+	return math.Pow(c.radius,2)*math.Pi
+}
+type A1 interface{
+	test1()
+}
+type B interface{
+	test2()
+}
+type C interface{
+	A1
+	B
+	test3()
+}
+func(cat Cat)test1(){
+	fmt.Println("test1")
+}
+func(cat Cat)test2(){
+	fmt.Println("test2")
+}
+func(cat Cat)test3(){
+	fmt.Println("test3")
+}
+func test1(a A){
+	fmt.Println(a)
+}
+type A interface{
+
+}
+type USB interface{
+	start() //USB设备开始工作
+	end()	//USB设备结束工作
+}
+func testInterFace(usb USB){
+	usb.start()
+	usb.end()
+}
+type Mouse struct{
+	name string
+}
+type FlashDisk struct{
+	name string
+}
+func(m Mouse)start(){
+	fmt.Println(m.name,"鼠标准备就绪，可以开始工作")
+}
+func(m Mouse)end(){
+	fmt.Println(m.name,"鼠标结束工作，可以安全退出")
+}
+func(f FlashDisk)start(){
+	fmt.Println(f.name,"准备开始工作，可以存储")
+}
+func(f FlashDisk)end(){
+	fmt.Println(f.name,"结束工作，可以弹出")
+}
+func(f FlashDisk)delete(){
+	fmt.Println(f.name,"删除")
+}
+type Student3 struct{
+	Person
+	school string
+}
+type Book struct{
+	bookName string
+	price float64
+}
+type Student2 struct{
+	name string
+	age int
+	book *Book
+}
+type Student struct{
+	name string
+	age int
+	book Book
+}
+type Worker struct{
+	name string
+	age int
+	sex string
+}
+type Cat struct{
+	color string
+	age int
+}
+func (w Worker)work(){
+	fmt.Println(w.name,"在工作")
+}
+func(p *Worker)rest(){
+	fmt.Println(p.name,"在休息")
+}
+func(p *Worker)printInfo(){
+	fmt.Printf("工人姓名：%s,工人年龄：%d,工人性别：%s\n",p.name,p.age,p.sex)
+}
+func(p *Cat)printInfo(){
+	fmt.Printf("猫的颜色：%s,猫的年龄：%d\n",p.color,p.age)
+}
+func(p *Person)eat(){
+	fmt.Println("吃窝窝头")
+}
+func(s *Student3)study(){
+	fmt.Println("学习")
+}
+func(s *Student3)eat(){
+	fmt.Println("吃猫粮")
+}
+type Person struct{
+	name string
+	age int
+	sex string
+	address string
+}
+
 func fun2(p1 *int){
 	*p1 = 200
 }
