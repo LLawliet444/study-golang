@@ -11,6 +11,7 @@ import(
 	// "errors"
 	// "net"
 	// "path/filepath"
+	"l_package/utils/timeutils"
 )
 
 func main(){
@@ -582,18 +583,20 @@ func main(){
  	// }
  	// fmt.Println(area)
 
- 	// panic()和recover() 适用：空指针引用、下标越界、除数为0、不应该出现的分支、输入不应该引起函数错误
- 	defer func(){
-		if msg := recover();msg != nil{
-			fmt.Println(msg,"程序回复")
-		}
-	}()
+ // 	// panic()和recover() 适用：空指针引用、下标越界、除数为0、不应该出现的分支、输入不应该引起函数错误
+ // 	defer func(){
+	// 	if msg := recover();msg != nil{
+	// 		fmt.Println(msg,"程序回复")
+	// 	}
+	// }()
 
- 	funA()
- 	defer myprint("defer main:3")
- 	funB()
- 	defer myprint("defer main:4")
- 	fmt.Println("over")
+ // 	funA()
+ // 	defer myprint("defer main:3")
+ // 	funB()
+ // 	defer myprint("defer main:4")
+ // 	fmt.Println("over")
+
+ timeutils.PrintTime()
 
 }
 func myprint(s string){
