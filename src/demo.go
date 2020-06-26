@@ -6,6 +6,11 @@ import(
 	// "sort"
 	// "strings"
 	"strconv"
+	// "os"
+	// "log"
+	// "errors"
+	// "net"
+	// "path/filepath"
 )
 
 func main(){
@@ -481,22 +486,179 @@ func main(){
  	// getType2(t1)
  	// getType2(c1)
 
- 	// Type关键词
- 	var i1 myint = 100
- 	var i2 = 200
- 	var name mystr = "王二狗"
- 	var s1 = "mother fuck"
- 	fmt.Println(i1,i2)
- 	fmt.Println(name,s1)
+ 	// // Type关键词
+ 	// var i1 myint = 100
+ 	// var i2 = 200
+ 	// var name mystr = "王二狗"
+ 	// var s1 = "mother fuck"
+ 	// fmt.Println(i1,i2)
+ 	// fmt.Println(name,s1)
 
- 	fmt.Printf("%T,%T,%T,%T\n",i1,i2,s1,name)
+ 	// fmt.Printf("%T,%T,%T,%T\n",i1,i2,s1,name)
 
- 	res1 := fun10()
- 	fmt.Println(res1(10,20))
- 	var i3 myint2 = 300
- 	i2 = i3
- 	fmt.Println(i2)
+ 	// res1 := fun10()
+ 	// fmt.Println(res1(10,20))
+ 	// var i3 myint2 = 300
+ 	// i2 = i3
+ 	// fmt.Println(i2)
 
+ 	// // ERROR
+ 	// f,err := os.Open("test.txt")
+ 	// if err != nil{
+ 	// 	// 错误类型
+ 	// 	fmt.Println(err)
+ 	// 	if ins,ok := err.(*os.PathError);ok{
+ 	// 		fmt.Println("1.Op:",ins.Op)
+ 	// 		fmt.Println("2.Path:",ins.Path)
+ 	// 		fmt.Println("3.Err:",ins.Err)
+ 	// 	}
+ 	// 	return
+ 	// }
+ 	// fmt.Println(f.Name(),"打开文件成功")
+
+ 	// addr,err := net.LookupHost("www.jintianddddd.com")
+ 	// if err != nil{
+ 	// 	fmt.Println(err)
+ 	// 	if ins,ok := err.(*net.DNSError);ok{
+ 	// 		if ins.Timeout(){
+ 	// 			fmt.Println("操作超时")
+ 	// 		}else if ins.Temporary(){
+ 	// 			fmt.Println("临时性错误")
+ 	// 		}else{
+ 	// 			fmt.Println("通常错误")
+ 	// 		}
+ 	// 	}
+ 	// 	return
+ 	// }
+ 	// fmt.Println(addr)
+
+ 	// files,err := filepath.Glob("[")
+ 	// if err != nil && err == filepath.ErrBadPattern{
+ 	// 	fmt.Println(err)
+ 	// 	return
+ 	// }
+ 	// fmt.Println("files:",files)
+
+ 	// // 创建错误
+ 	// err1 := errors.New("创建错误")
+ 	// fmt.Println(err1)
+ 	// fmt.Printf("%T\n",err1)
+ 	// err2 := fmt.Errorf("错误的信息码：%d",100)
+ 	// fmt.Println(err2)
+ 	// fmt.Printf("%T\n",err2)
+
+ 	// err3 := checkAge(-10)
+ 	// if err3 != nil{
+ 	// 	fmt.Println(err3)
+ 	// 	return
+ 	// }
+ 	// fmt.Println("没有错误")
+
+ 	// // 自定义错误
+ 	// var c Circle = Circle{radius:-10}
+ 	// a1,err := c.area()
+ 	// if err != nil{
+ 	// 	fmt.Println(err)
+ 	// 	if err,ok := err.(*areaError);ok{
+ 	// 		fmt.Printf("半径是：%2f\n",err.radius)
+ 	// 	}
+ 	// 	return
+ 	// }
+ 	// fmt.Println(a1)
+
+ 	// length,width := 3.4,-9.8
+ 	// area,err := rectArea(length,width)
+ 	// if err != nil{
+ 	// 	fmt.Println(err)
+ 	// 	if err,ok := err.(*rectAreaError);ok{
+ 	// 		if err.lengthNegative(){
+ 	// 			fmt.Printf("error:长度%2f小于0",err.length)
+ 	// 		}
+ 	// 		if err.widthNegative(){
+ 	// 			fmt.Printf("error:宽度%2f小于0",err.width)
+ 	// 		}
+ 	// 	}
+ 	// 	return
+ 	// }
+ 	// fmt.Println(area)
+
+ 	// panic()和recover() 适用：空指针引用、下标越界、除数为0、不应该出现的分支、输入不应该引起函数错误
+ 	defer func(){
+		if msg := recover();msg != nil{
+			fmt.Println(msg,"程序回复")
+		}
+	}()
+
+ 	funA()
+ 	defer myprint("defer main:3")
+ 	funB()
+ 	defer myprint("defer main:4")
+ 	fmt.Println("over")
+
+}
+func myprint(s string){
+	fmt.Println(s)
+}
+func funA(){
+	fmt.Println("我是函数A")
+}
+func funB(){
+	fmt.Println("我是函数B")
+	defer myprint("defer funB():1")
+	for i:= 1;i<=10;i++{
+		fmt.Println(i)
+		if i == 5{
+			panic("funB函数panic")
+		}
+	}
+	defer myprint("defer funB():2")
+}
+type rectAreaError struct{
+	msg string
+	length float64
+	width float64
+}
+func (e *rectAreaError)Error()string{
+	return e.msg
+}
+func (e *rectAreaError)lengthNegative()bool{
+	return e.length < 0
+}
+func (e *rectAreaError)widthNegative()bool{
+	return e.width < 0
+}
+func rectArea(length,width float64)(float64,error){
+	msg := ""
+	if length < 0{
+		msg = "长度小于0"
+	}
+	if width < 0{
+		if msg == ""{
+			msg = "宽度小于0"
+		}else{
+			msg += ",宽度也小于0"
+		}
+	}
+	if msg != ""{
+		return 0,&rectAreaError{msg,length,width}
+	}
+	return length*width,nil
+}
+func checkAge(age int)error{
+	if age < 0{
+		// return errors.New("年龄不合法")
+		err := fmt.Errorf("给定的年龄%d不合法",age)
+		return err
+	}
+	fmt.Println("年龄为：",age)
+	return nil
+}
+type areaError struct{
+	msg string
+	radius float64
+}
+func (e *areaError)Error()string{
+	return fmt.Sprintf("error:半径,%2f,%s",e.radius,e.msg)
 }
 // 定义新类型
 type myint int
@@ -530,11 +692,11 @@ func getType2(s Shape){
 	}
 }
 func testShape(s Shape){
-	fmt.Printf("周长：%2f,面积：%2f\n",s.peri(),s.area())
+	fmt.Printf("周长：%2f,面积：%2f\n",s.peri())
 }
 type Shape interface{
 	peri() float64 //周长
-	area() float64 //面积
+	area() (float64,error) //面积
 }
 type Triangle struct{
 	a,b,c float64
@@ -542,10 +704,14 @@ type Triangle struct{
 func (t Triangle)peri()float64{
 	return t.a+t.b+t.c
 }
-func (t Triangle)area()float64{
+func (t Triangle)area()(float64,error){
+	if t.a < 0 {
+		return 0,&areaError{"长度是非法的",t.a}
+	}
+
 	p := t.peri()/2
 	s := math.Sqrt( p*(p-t.a)*(p-t.b)*(p-t.c) )
-	return s
+	return s,nil
 }
 type Circle struct{
 	radius float64
@@ -553,8 +719,11 @@ type Circle struct{
 func (c Circle)peri()float64{
 	return c.radius*2*math.Pi
 }
-func (c Circle)area()float64{
-	return math.Pow(c.radius,2)*math.Pi
+func (c Circle)area()(float64,error){
+	if c.radius < 0 {
+		return 0,&areaError{"半径是非法的",c.radius}
+	}
+	return math.Pow(c.radius,2)*math.Pi,nil
 }
 type A1 interface{
 	test1()
