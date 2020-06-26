@@ -583,18 +583,18 @@ func main(){
  	// }
  	// fmt.Println(area)
 
- // 	// panic()和recover() 适用：空指针引用、下标越界、除数为0、不应该出现的分支、输入不应该引起函数错误
- // 	defer func(){
+ 	// // panic()和recover() 适用：空指针引用、下标越界、除数为0、不应该出现的分支、输入不应该引起函数错误
+ 	// defer func(){
 	// 	if msg := recover();msg != nil{
 	// 		fmt.Println(msg,"程序回复")
 	// 	}
 	// }()
 
- // 	funA()
- // 	defer myprint("defer main:3")
- // 	funB()
- // 	defer myprint("defer main:4")
- // 	fmt.Println("over")
+ 	// funA()
+ 	// defer myprint("defer main:3")
+ 	// funB()
+ 	// defer myprint("defer main:4")
+ 	// fmt.Println("over")
 
  timeutils.PrintTime()
 
@@ -606,6 +606,11 @@ func funA(){
 	fmt.Println("我是函数A")
 }
 func funB(){
+	// defer func(){
+	// 	if msg := recover();msg != nil{
+	// 		fmt.Println(msg,"程序回复")
+	// 	}
+	// }()
 	fmt.Println("我是函数B")
 	defer myprint("defer funB():1")
 	for i:= 1;i<=10;i++{
