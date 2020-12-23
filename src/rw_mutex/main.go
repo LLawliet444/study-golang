@@ -2,42 +2,59 @@ package main
 
 import (
 	"fmt"
-	"time"
-	"math/rand"
 	"sync"
+	"time"
 )
 var ticket = 10
 
 // 创建🔐
-var rwMutex sync.RWMutex
+var rwMutex *sync.RWMutex
+var wg *sync.WaitGroup
 func main(){
-	// a := 1
-	// go func(){
-	// 	a = 2
-	// 	fmt.Println("goroutine中",a)
-	// }()
+	rwMutex = new(sync.RWMutex)
+	wg = new(sync.WaitGroup)
 
-	// a = 3
-	// time.Sleep(1)
-	// fmt.Println("main goroutine",a)
+	wg.Add(3)
 
-	wg.Add(4)
-	// 4个售票口
-	go saleTickets("售票口1")
-	go saleTickets("售票口2")
-	go saleTickets("售票口3")
-	go saleTickets("售票口4")
+	// go readData(1)
+	// go readData(2)
+
+	go writeData(1)
+	go readData(2)
+	go readData(3)
+	go writeData(4)
 
 	wg.Wait()
+	fmt.Println("main...over...")
+}
 
-	// time.Sleep(10*time.Second)
+func writeData( i int ){
+	defer wg.Done()
+
+	fmt.Println(i,"写")
+
+	rwMutex.Lock()	//写操作上锁
+
+	fmt.Println(i,"正在写数据。。。")
+
+	time.Sleep(3*time.Second)
+
+	rwMutex.Unlock()
+	fmt.Println(i,"写结束。。。")
 }
 
 func readData(i int){
+	defer wg.Done()
 
 	fmt.Println(i,"读")
 
-	rwMutex.Rlock()
+	rwMutex.RLock()	//读操作上锁
 
+	fmt.Println(i,"正在读取数据。。。")
+
+	time.Sleep(1*time.Second)
+
+	rwMutex.RUnlock()
+	fmt.Println(i,"读结束。。。")
 
 }
